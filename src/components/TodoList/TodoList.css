@@ -1,0 +1,7 @@
+.todo-list{
+    width: 90%;
+    margin: 20px;
+}
+.todo-done{
+    text-decoration: line-through;
+}
