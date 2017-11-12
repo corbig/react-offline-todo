@@ -60,7 +60,8 @@
     "@types/jest": "^21.1.5",
     "@types/node": "^8.0.47",
     "@types/react": "^16.0.19",
-    "@types/react-dom": "^16.0.2"
+    "@types/react-dom": "^16.0.2",
+    "offline-plugin": "^4.8.4"
   },
   "jest": {
     "mapCoverage": true,
