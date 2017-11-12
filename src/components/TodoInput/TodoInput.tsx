@@ -5,6 +5,9 @@ import './TodoInput.css';
 import { connect } from 'react-redux';
 import { addTodo } from '../../actions/TodoActions';
 
+/**
+ * Interfaces of TodoInput state/props 
+ */
 interface TodoInputState {
     todoContent: string;
 }
@@ -13,28 +16,40 @@ interface TodoInputProps {
     addTodo: (todoContent: string) => Promise<PouchDB.UpsertResponse>;
 }
 
+/**
+ * Function to call redux actions
+ */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         addTodo: (todoContent: string) => dispatch(addTodo(todoContent))
     };
 };
 
+/**
+ * TodoInput Component
+ */
 export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
 
     constructor(props: TodoInputProps) {
         super(props);
 
         this.state = {
-            todoContent: ''
+            todoContent: '' // input content
         };
     }
 
+    /**
+     * Function to refresh input content on each keystroke
+     */
     handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         this.setState({
             todoContent: event.currentTarget.value,
         });
     }
 
+    /**
+     * Function to call the addTodo Redux action
+     */
     addTodo = () => {
 
         if (this.state.todoContent !== '') {
@@ -62,5 +77,8 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
         );
     }
 }
-
+/**
+ * We connect the TodoList component to Redux
+ * Here, we don't need a mapStateToProps
+ */
 export default connect(null, mapDispatchToProps)(TodoInput);

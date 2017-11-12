@@ -1,7 +1,13 @@
+/**
+ * status of the todo
+ */
 export enum CodeStatus {
     TODO, DONE
 }
 
+/**
+ * redux actions
+ */
 export const Action = {
     ADD_TODO: 'ADD_TODO',
     UPDATE_TODO: 'UPDATE_TODO',

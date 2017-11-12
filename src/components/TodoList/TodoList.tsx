@@ -11,6 +11,9 @@ import { CodeStatus } from '../../constants/constants';
 import DeleteIcon from 'material-ui-icons/Delete';
 import './TodoList.css';
 
+/**
+ * Interfaces of TodoList state/props 
+ */
 interface TodoListState {
     todoList: List<TodoImmutable>;
 }
@@ -22,6 +25,9 @@ interface TodoListProps {
     todoList: List<TodoImmutable>;
 }
 
+/**
+ * Function to call redux actions
+ */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
         getAllTodos: () => dispatch(getAllTodos()),
@@ -30,12 +36,19 @@ const mapDispatchToProps = (dispatch: Function) => {
     };
 };
 
+/**
+ * Function to map redux store properties to TodoList properties
+ * @param store 
+ */
 const mapStateToProps = (store: List<TodoImmutable>) => {
     return {
         todoList: store
     };
 };
 
+/**
+ * TodoList Component
+ */
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
 
     componentWillMount() {
@@ -43,12 +56,13 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
     }
 
     public render() {
+        // if there is no todo we return an empty div
         if (this.props.todoList.size === 0) {
             return (<div />);
         }
         return (
             <Card className="todo-list">
-                <ListComponent>
+                <ListComponent className="list-component">
                     {this.props.todoList.map((todo: TodoImmutable) => (
                         <ListItem
                             key={todo.get('_id')}
@@ -58,7 +72,6 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
                         >
                             <Checkbox
                                 checked={todo.get('status') === CodeStatus.DONE}
-                                tabIndex={-1}
                             />
                             <ListItemText
                                 primary={todo.get('content')}
@@ -77,4 +90,7 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
     }
 }
 
+/**
+ * We connect the TodoList component to Redux
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

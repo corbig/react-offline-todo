@@ -5,3 +5,7 @@
 .todo-done{
     text-decoration: line-through;
 }
+
+.list-component{
+    padding: 0 !important;
+}

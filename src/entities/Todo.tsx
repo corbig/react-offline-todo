@@ -1,7 +1,7 @@
 import { TypedRecord } from 'typed-immutable-record';
 import { CodeStatus } from '../constants/constants';
 
-/** Decalration du type todo immutable */
+/** Immutable todo interface */
 export interface TodoImmutable extends TypedRecord<TodoImmutable> {
     get(key: '_id'): string;
     get(key: '_rev'): string;
@@ -13,10 +13,10 @@ export interface TodoImmutable extends TypedRecord<TodoImmutable> {
     set(key: 'status', value: CodeStatus): TodoImmutable;
 }
 
-/** Deeclaration du type todo mutable */
+/** Mutable todo interface */
 export interface Todo {
-    _id?: string;
-    _rev?: string;
-    content: string;
-    status: CodeStatus;
+    _id?: string;  // id parameter of PouchDB document because here a todo is also a Pouch doc
+    _rev?: string; // revision of the Pouch doc
+    content: string; // content of the todo
+    status: CodeStatus; // status of the todo
 }
