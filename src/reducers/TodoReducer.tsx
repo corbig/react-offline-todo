@@ -18,18 +18,16 @@ interface TodoAction {
  */
 export const todoReducer = (state: List<TodoImmutable> = fromJS([]), action: TodoAction) => {
     switch (action.type) {
-        case Action.GET_ALL_TODOS: // We simply returns the todoList from Actions
-            return action.todoList;
         case Action.ADD_TODO: // We add the new todo to the state
             return state.push(action.todo);
         case Action.UPDATE_TODO: // We find the todo to change and we replace it
             return state.set(
-                state.findIndex((todo: TodoImmutable) => todo.get('_id') === action.todo.get('_id')),
+                state.findIndex((todo: TodoImmutable) => todo.get('id') === action.todo.get('id')),
                 action.todo
             );
         case Action.REMOVE_TODO: // We find the todo to delete and we remove it
             return state.remove(
-                state.findIndex((todo: TodoImmutable) => todo.get('_id') === action.todo.get('_id'))
+                state.findIndex((todo: TodoImmutable) => todo.get('id') === action.todo.get('id'))
             );
         default:
             return state;

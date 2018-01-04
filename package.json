@@ -1,10 +1,8 @@
 {
-  "name": "react-offline-todo",
+  "name": "react-todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/pouchdb": "^6.3.1",
-    "@types/pouchdb-upsert": "^2.2.1",
     "@types/react-redux": "^5.0.12",
     "@types/react-router": "^4.0.16",
     "@types/react-router-dom": "^4.2.0",
@@ -24,8 +22,6 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
-    "pouchdb": "^6.3.4",
-    "pouchdb-upsert": "^2.2.0",
     "promise": "8.0.1",
     "react": "^16.0.0",
     "react-dev-utils": "^4.0.1",
@@ -60,8 +56,7 @@
     "@types/jest": "^21.1.5",
     "@types/node": "^8.0.47",
     "@types/react": "^16.0.19",
-    "@types/react-dom": "^16.0.2",
-    "offline-plugin": "^4.8.4"
+    "@types/react-dom": "^16.0.2"
   },
   "jest": {
     "mapCoverage": true,

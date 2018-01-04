@@ -10,7 +10,6 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-const OfflinePlugin = require('offline-plugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -287,17 +286,6 @@ module.exports = {
     new ManifestPlugin({
       fileName: 'asset-manifest.json',
     }),
-    new OfflinePlugin({
-      ServiceWorker: {
-        events: true,
-        navigateFallbackURL: '/'
-      },
-      AppCache: {
-        events: true,
-        FALLBACK: { '/': '/' }
-      }
-    }),
-
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code. This is a practical
     // solution that requires the user to opt into importing specific locales.

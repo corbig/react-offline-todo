@@ -14,7 +14,7 @@ interface TodoInputState {
 }
 
 interface TodoInputProps {
-    addTodo: (todoContent: string) => Promise<PouchDB.UpsertResponse>;
+    addTodo: (todoContent: string) => void;
 }
 
 /**

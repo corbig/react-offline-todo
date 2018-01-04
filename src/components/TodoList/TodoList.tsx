@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getAllTodos, changeStatus, removeTodo } from '../../actions/TodoActions';
+import { changeStatus, removeTodo } from '../../actions/TodoActions';
 import { TodoImmutable } from '../../entities/Todo';
 import { List } from 'immutable';
 import {
@@ -19,7 +19,6 @@ interface TodoListState {
 }
 
 interface TodoListProps {
-    getAllTodos: () => Promise<void>;
     changeStatus: (todo: TodoImmutable) => Promise<void>;
     removeTodo: (todo: TodoImmutable) => Promise<void>;
     todoList: List<TodoImmutable>;
@@ -30,7 +29,6 @@ interface TodoListProps {
  */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        getAllTodos: () => dispatch(getAllTodos()),
         changeStatus: (todo: TodoImmutable) => dispatch(changeStatus(todo)),
         removeTodo: (todo: TodoImmutable) => dispatch(removeTodo(todo))
     };
@@ -51,10 +49,6 @@ const mapStateToProps = (store: List<TodoImmutable>) => {
  */
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
 
-    componentWillMount() {
-        this.props.getAllTodos();
-    }
-
     public render() {
         // if there is no todo we return an empty div
         if (this.props.todoList.size === 0) {
@@ -65,7 +59,7 @@ export class TodoList extends React.Component<TodoListProps, TodoListState> {
                 <ListComponent className="list-component">
                     {this.props.todoList.map((todo: TodoImmutable) => (
                         <ListItem
-                            key={todo.get('_id')}
+                            key={todo.get('id')}
                             dense={true}
                             button={true}
                             onClick={() => this.props.changeStatus(todo)}
