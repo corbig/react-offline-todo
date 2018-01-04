@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TextField, Button } from 'material-ui';
+import { IconButton, FormControl, InputLabel } from 'material-ui';
+import Input, { InputAdornment } from 'material-ui/Input';
 import AddIcon from 'material-ui-icons/Add';
 import './TodoInput.css';
 import { connect } from 'react-redux';
@@ -41,7 +42,7 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
     /**
      * Function to refresh input content on each keystroke
      */
-    handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({
             todoContent: event.currentTarget.value,
         });
@@ -62,17 +63,21 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
 
         return (
             <div className="input-todos">
-                <TextField
-                    label="Nouvelle tâche"
+             <FormControl fullWidth={true}>
+                <InputLabel>Nouvelle Tâche</InputLabel>
+                <Input
                     className="input-field"
                     value={this.state.todoContent}
                     onChange={this.handleChange}
-                    margin="normal"
+                    endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton onClick={this.addTodo} color="primary">
+                            <AddIcon />
+                          </IconButton>
+                        </InputAdornment>
+                    }
                 />
-
-                <Button color="primary" raised={true} className="add-button" onClick={this.addTodo}>
-                    <AddIcon />
-                </Button>
+              </FormControl>
             </div>
         );
     }
