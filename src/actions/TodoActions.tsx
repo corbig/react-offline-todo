@@ -1,4 +1,4 @@
-import { TodoImmutable } from '../entities/Todo';
+import { TodoImmutable, Todo } from '../entities/Todo';
 import { fromJS } from 'immutable';
 import { CodeStatus, Action } from '../constants/constants';
 
@@ -8,11 +8,11 @@ import { CodeStatus, Action } from '../constants/constants';
  * @param todoContent : content of the todo
  */
 export const addTodo = (todoContent: string) => {
-    const newTodo: TodoImmutable = fromJS({
-        id: new Date().getTime(), 
+    const newTodo: Todo = {
+        id: new Date().getTime().toString(), 
         content: todoContent,
         status: CodeStatus.TODO
-    });
+    };
 
     return {
         type: Action.ADD_TODO,

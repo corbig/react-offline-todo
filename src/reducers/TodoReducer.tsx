@@ -5,7 +5,6 @@ import { Action } from '../constants/constants';
 interface TodoAction {
     type: string;
     todo: TodoImmutable;
-    todoList: List<TodoImmutable>;
 }
 
 /**

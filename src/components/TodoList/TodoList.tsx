@@ -15,7 +15,7 @@ import './TodoList.css';
  * Interfaces of TodoList state/props 
  */
 interface TodoListState {
-    todoList: List<TodoImmutable>;
+    
 }
 
 interface TodoListProps {
@@ -26,6 +26,7 @@ interface TodoListProps {
 
 /**
  * Function to call redux actions
+ * @param dispatch redux function to notify the store
  */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
