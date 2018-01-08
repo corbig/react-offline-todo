@@ -3,7 +3,7 @@ import './App.css';
 import { createStore } from 'redux';
 import { todoReducer } from './reducers/TodoReducer';
 import { Provider } from 'react-redux';
-import { TodoView } from './views/TodoView';
+import { TodoView } from './views/TodoView/TodoView';
 import { AppBar, Typography, Toolbar } from 'material-ui';
 
 class App extends React.Component {

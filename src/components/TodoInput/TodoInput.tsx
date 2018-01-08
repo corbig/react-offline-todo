@@ -66,7 +66,6 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
              <FormControl fullWidth={true}>
                 <InputLabel>Nouvelle Tâche</InputLabel>
                 <Input
-                    className="input-field"
                     value={this.state.todoContent}
                     onChange={this.handleChange}
                     endAdornment={
