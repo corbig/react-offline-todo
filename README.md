@@ -11,12 +11,12 @@ then install dependencies.
 npm install
 ```
 
-To start in dev environement use 
+To start in dev environment use 
 
 ```shell
 npm start
 ```
-To start in prod environnement use
+To start in prod environment use
 ```shell
 npm install -g serve
 
