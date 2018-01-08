@@ -14,7 +14,7 @@ interface TodoInputState {
 }
 
 interface TodoInputProps {
-    addTodo: (todoContent: string) => Promise<PouchDB.UpsertResponse>;
+    addTodo: (todoContent: string) => void;
 }
 
 /**
@@ -66,7 +66,6 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
              <FormControl fullWidth={true}>
                 <InputLabel>Nouvelle Tâche</InputLabel>
                 <Input
-                    className="input-field"
                     value={this.state.todoContent}
                     onChange={this.handleChange}
                     endAdornment={

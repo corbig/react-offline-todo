@@ -15,7 +15,7 @@ import './TodoList.css';
  * Interfaces of TodoList state/props 
  */
 interface TodoListState {
-    todoList: List<TodoImmutable>;
+   
 }
 
 interface TodoListProps {
