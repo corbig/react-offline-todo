@@ -7,18 +7,34 @@ import { CodeStatus, Action } from '../constants/constants';
 // Injection of pouchdb upsert plugin
 PouchDB.plugin(pouchDBUpsert);
 
-// Setting up a database call TodoDB
-const db = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+let todoDataBase: PouchDB.Database;
 
+// Setting up a database call TodoDB
+const getDB = () => new Promise((resolve) => {
+        if (todoDataBase === null || todoDataBase === undefined) {
+            todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+            return resolve(todoDataBase);
+        } else {
+            todoDataBase.info().catch((err) => {
+                todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+                return Promise.resolve();
+            }).then(() => {
+                return resolve(todoDataBase);
+            });
+        }
+});
 /**
  * We create a dedicated function to save a todo
  * @param todo
  */
 const saveTodo = (todo: TodoImmutable) => {
 
-    return db.upsert(todo.get('_id'), (doc) => {
-        return todo.toJS();
-    });
+    return getDB().then((database: PouchDB.Database) => 
+    
+        database.upsert(todo.get('_id'), (doc) => {
+            return todo.toJS();
+        })
+    );
 };
 
 /**
@@ -33,17 +49,21 @@ export const getAllTodos = () => {
     const todoList: Todo[] = [];
 
     return (dispatch: Function) => {
-        return db.allDocs({ startkey: 'todo', descending: false, include_docs: true }).then(data => {
 
-            data.rows.map((item) => todoList.push(item.doc as Todo));
+        return getDB().then((dataBase: PouchDB.Database) => 
+             dataBase.allDocs({ startkey: 'todo', descending: false, include_docs: true }).then(data => {
+
+                 data.rows.map((item) => todoList.push(item.doc as Todo));
 
             // Here we send a notification to redux reducer to refresh the store
-            dispatch({
-                type: Action.GET_ALL_TODOS,
-                todoList: fromJS(todoList)
-            });
+                 dispatch({
+                     type: Action.GET_ALL_TODOS,
+                     todoList: fromJS(todoList)
+                 });
 
-        });
+            })
+        );
+        
     };
 };
 
@@ -110,17 +130,18 @@ export const changeStatus = (todo: TodoImmutable) => {
 export const removeTodo = (todo: TodoImmutable) => {
 
     return (dispatch: Function) => {
-        return db.get(todo.get('_id')).then((doc) => {
-
-            return db.remove(doc).then(response => {
+        return getDB().then((dataBase: PouchDB.Database) => 
+            dataBase.get(todo.get('_id')).then((doc) => {
+                return dataBase.remove(doc).then(response => {
 
                 // We send a notification to refresh redux store
-                dispatch({
-                    type: Action.REMOVE_TODO,
-                    todo
+                    dispatch({
+                        type: Action.REMOVE_TODO,
+                        todo
+                    });
                 });
-            });
 
-        });
+            })
+        );
     };
 };
