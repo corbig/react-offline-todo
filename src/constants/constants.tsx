@@ -11,6 +11,6 @@ export enum CodeStatus {
 export const Action = {
     ADD_TODO: 'ADD_TODO',
     UPDATE_TODO: 'UPDATE_TODO',
-    GET_ALL_TODOS: 'GET_ALL_TODOS',
-    REMOVE_TODO: 'REMOVE_TODO'
+    REMOVE_TODO: 'REMOVE_TODO',
+    GET_ALL_TODOS: 'GET_ALL_TODOS'
 };

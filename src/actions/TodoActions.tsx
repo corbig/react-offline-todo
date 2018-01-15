@@ -11,17 +11,17 @@ let todoDataBase: PouchDB.Database;
 
 // Setting up a database call TodoDB
 const getDB = () => new Promise((resolve) => {
-        if (todoDataBase === null || todoDataBase === undefined) {
+    if (todoDataBase === null || todoDataBase === undefined) {
+        todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+        return resolve(todoDataBase);
+    } else {
+        todoDataBase.info().catch((err) => {
             todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+            return Promise.resolve();
+        }).then(() => {
             return resolve(todoDataBase);
-        } else {
-            todoDataBase.info().catch((err) => {
-                todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
-                return Promise.resolve();
-            }).then(() => {
-                return resolve(todoDataBase);
-            });
-        }
+        });
+    }
 });
 /**
  * We create a dedicated function to save a todo
@@ -29,8 +29,8 @@ const getDB = () => new Promise((resolve) => {
  */
 const saveTodo = (todo: TodoImmutable) => {
 
-    return getDB().then((database: PouchDB.Database) => 
-    
+    return getDB().then((database: PouchDB.Database) =>
+
         database.upsert(todo.get('_id'), (doc) => {
             return todo.toJS();
         })
@@ -50,20 +50,20 @@ export const getAllTodos = () => {
 
     return (dispatch: Function) => {
 
-        return getDB().then((dataBase: PouchDB.Database) => 
-             dataBase.allDocs({ startkey: 'todo', descending: false, include_docs: true }).then(data => {
+        return getDB().then((dataBase: PouchDB.Database) =>
+            dataBase.allDocs({ startkey: 'todo', descending: false, include_docs: true }).then(data => {
 
-                 data.rows.map((item) => todoList.push(item.doc as Todo));
+                data.rows.map((item) => todoList.push(item.doc as Todo));
 
-            // Here we send a notification to redux reducer to refresh the store
-                 dispatch({
-                     type: Action.GET_ALL_TODOS,
-                     todoList: fromJS(todoList)
-                 });
+                // Here we send a notification to redux reducer to refresh the store
+                dispatch({
+                    type: Action.GET_ALL_TODOS,
+                    todoList: fromJS(todoList)
+                });
 
             })
         );
-        
+
     };
 };
 
@@ -77,16 +77,16 @@ export const getAllTodos = () => {
  * @param todoContent : content of the todo
  */
 export const addTodo = (todoContent: string) => {
-    const newTodo: TodoImmutable = fromJS({
+    const newTodo: Todo = {
         _id: 'todo_' + new Date().getTime(),
         content: todoContent,
         status: CodeStatus.TODO
-    });
+    };
 
     return (dispatch: Function) => {
 
         // We call our dedicated save action
-        return saveTodo(newTodo).then(reponse => {
+        return saveTodo(fromJS(newTodo)).then(reponse => {
             // Then, we send a notification to refresh redux store
             dispatch({
                 type: Action.ADD_TODO,
@@ -130,11 +130,11 @@ export const changeStatus = (todo: TodoImmutable) => {
 export const removeTodo = (todo: TodoImmutable) => {
 
     return (dispatch: Function) => {
-        return getDB().then((dataBase: PouchDB.Database) => 
+        return getDB().then((dataBase: PouchDB.Database) =>
             dataBase.get(todo.get('_id')).then((doc) => {
                 return dataBase.remove(doc).then(response => {
 
-                // We send a notification to refresh redux store
+                    // We send a notification to refresh redux store
                     dispatch({
                         type: Action.REMOVE_TODO,
                         todo
