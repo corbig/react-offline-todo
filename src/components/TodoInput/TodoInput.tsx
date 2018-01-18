@@ -63,20 +63,20 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
 
         return (
             <div className="input-todos">
-             <FormControl fullWidth={true}>
-                <InputLabel>Nouvelle Tâche</InputLabel>
-                <Input
-                    value={this.state.todoContent}
-                    onChange={this.handleChange}
-                    endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton onClick={this.addTodo} color="primary">
-                            <AddIcon />
-                          </IconButton>
-                        </InputAdornment>
-                    }
-                />
-              </FormControl>
+                <FormControl fullWidth={true}>
+                    <InputLabel>New Task</InputLabel>
+                    <Input
+                        value={this.state.todoContent}
+                        onChange={this.handleChange}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton onClick={this.addTodo} color="primary">
+                                    <AddIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                </FormControl>
             </div>
         );
     }
