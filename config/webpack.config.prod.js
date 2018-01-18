@@ -288,13 +288,12 @@ module.exports = {
       fileName: 'asset-manifest.json',
     }),
     new OfflinePlugin({
+      autoUpdate : 1000 * 5,
       ServiceWorker: {
-        events: true,
-        navigateFallbackURL: '/'
+        events: true
       },
       AppCache: {
-        events: true,
-        FALLBACK: { '/': '/' }
+        events: true
       }
     }),
 

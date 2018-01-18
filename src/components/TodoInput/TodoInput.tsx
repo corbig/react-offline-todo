@@ -64,7 +64,7 @@ export class TodoInput extends React.Component<TodoInputProps, TodoInputState> {
         return (
             <div className="input-todos">
              <FormControl fullWidth={true}>
-                <InputLabel>Nouvelle Tâche</InputLabel>
+                <InputLabel>New Task</InputLabel>
                 <Input
                     value={this.state.todoContent}
                     onChange={this.handleChange}
