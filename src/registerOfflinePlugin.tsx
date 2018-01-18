@@ -30,7 +30,7 @@ export default function registerOfflinePlugin() {
         OfflinePluginRuntime.applyUpdate();
       },
       onUpdated: () => {
-        // Reload current window to use new cache/SW
+        // Display the reload snack-bar
         renderSnackBarUpdate();
       }
     });
