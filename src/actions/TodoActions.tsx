@@ -7,19 +7,19 @@ import { CodeStatus, Action } from '../constants/constants';
 // Injection of pouchdb upsert plugin
 PouchDB.plugin(pouchDBUpsert);
 
-let todoDataBase: PouchDB.Database;
+let todoDatabase: PouchDB.Database;
 
 // Setting up a database call TodoDB
 const getDB = () => new Promise((resolve) => {
-    if (todoDataBase === null || todoDataBase === undefined) {
-        todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
-        return resolve(todoDataBase);
+    if (todoDatabase === null || todoDatabase === undefined) {
+        todoDatabase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+        return resolve(todoDatabase);
     } else {
-        todoDataBase.info().catch((err) => {
-            todoDataBase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
+        todoDatabase.info().catch((err) => {
+            todoDatabase = new PouchDB('TodoDB', { revs_limit: 1, auto_compaction: true });
             return Promise.resolve();
         }).then(() => {
-            return resolve(todoDataBase);
+            return resolve(todoDatabase);
         });
     }
 });
@@ -29,9 +29,9 @@ const getDB = () => new Promise((resolve) => {
  */
 const saveTodo = (todo: TodoImmutable) => {
 
-    return getDB().then((database: PouchDB.Database) =>
+    return getDB().then((db: PouchDB.Database) =>
 
-        database.upsert(todo.get('_id'), (doc) => {
+        db.upsert(todo.get('_id'), (doc) => {
             return todo.toJS();
         })
     );
@@ -50,8 +50,8 @@ export const getAllTodos = () => {
 
     return (dispatch: Function) => {
 
-        return getDB().then((dataBase: PouchDB.Database) =>
-            dataBase.allDocs({ startkey: 'todo', descending: false, include_docs: true }).then(data => {
+        return getDB().then((db: PouchDB.Database) =>
+            db.allDocs({ startkey: 'todo', endkey: 'todo\ufff0', descending: false, include_docs: true }).then(data => {
 
                 data.rows.map((item) => todoList.push(item.doc as Todo));
 
@@ -130,9 +130,9 @@ export const changeStatus = (todo: TodoImmutable) => {
 export const removeTodo = (todo: TodoImmutable) => {
 
     return (dispatch: Function) => {
-        return getDB().then((dataBase: PouchDB.Database) =>
-            dataBase.get(todo.get('_id')).then((doc) => {
-                return dataBase.remove(doc).then(response => {
+        return getDB().then((db: PouchDB.Database) =>
+            db.get(todo.get('_id')).then((doc) => {
+                return db.remove(doc).then(response => {
 
                     // We send a notification to refresh redux store
                     dispatch({
