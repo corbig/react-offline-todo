@@ -3,7 +3,7 @@ Simple todo-app for learning how to create an app with React
 To use the app, first download source 
 
 ```shell
-git clone -b simple-todo-app https://github.com/corbig/react-offline-todo
+git clone -b test-simple-todo-app https://github.com/corbig/react-offline-todo
 ```
 then install dependencies.
 
