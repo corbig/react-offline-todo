@@ -26,14 +26,14 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
     "pouchdb": "6.3.4",
-    "pouchdb-upsert": "^2.2.0",
+    "pouchdb-upsert": "2.2.0",
     "promise": "8.0.1",
     "react": "16.0.0",
-    "react-dev-utils": "^4.0.1",
-    "react-dom": "^16.0.0",
-    "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
+    "react-dev-utils": "4.0.1",
+    "react-dom": "16.0.0",
+    "react-redux": "5.0.6",
+    "react-router": "4.2.0",
+    "react-router-dom": "4.2.2",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
     "source-map-loader": "0.2.1",
@@ -103,7 +103,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/Users/corentinbigot/React/ipp-todos/tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },
