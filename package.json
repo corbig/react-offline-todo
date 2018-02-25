@@ -97,7 +97,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/Users/corentinbigot/React/ipp-todos/tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },
