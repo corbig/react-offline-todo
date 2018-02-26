@@ -17,6 +17,8 @@ module.exports = function (config) {
 
         webpack: webpackConfiguration,
 
-        reporters: ['mocha']
+        reporters: ['mocha'],
+
+        singleRun: false
     });
 };

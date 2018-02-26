@@ -92,7 +92,7 @@ describe('<TodoList />', () => {
 
     });
 
-    it('renders the <TodoList /> component and change todo status', () => {
+    it('renders the <TodoList /> component and remove todo', () => {
 
         const removeTodoSpy = sinon.spy(removeTodo);
 
