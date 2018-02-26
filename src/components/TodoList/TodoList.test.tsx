@@ -37,7 +37,7 @@ describe('<TodoList />', () => {
 
         expect(wrapper.find(ListItem).length).to.equal(1);
 
-        const todoElement = wrapper.find(ListItem).at(0);
+        const todoElement = wrapper.find(ListItem);
 
         expect(todoElement.find(Checkbox).props().checked).to.equal(false);
         expect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
@@ -59,7 +59,7 @@ describe('<TodoList />', () => {
 
         expect(wrapper.find(ListItem).length).to.equal(1);
 
-        const todoElement = wrapper.find(ListItem).at(0);
+        const todoElement = wrapper.find(ListItem);
 
         expect(todoElement.find(Checkbox).props().checked).to.equal(true);
         expect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
@@ -84,7 +84,7 @@ describe('<TodoList />', () => {
 
         expect(wrapper.find(ListItem).length).to.equal(1);
 
-        const todoElement = wrapper.find(ListItem).at(0);
+        const todoElement = wrapper.find(ListItem);
 
         todoElement.simulate('click');
 
@@ -109,7 +109,7 @@ describe('<TodoList />', () => {
 
         expect(wrapper.find(ListItem).length).to.equal(1);
 
-        const removeButtonElement = wrapper.find(ListItem).at(0).find(IconButton);
+        const removeButtonElement = wrapper.find(ListItem).find(IconButton);
 
         removeButtonElement.simulate('click');
 
