@@ -5,6 +5,6 @@ configure({ adapter: new Adapter() });
 
 // Comment these 2 lines to run tests with Jest
 
-const testsContext = require.context('.', true, /.test$/);
+/*const testsContext = require.context('.', true, /.test$/);
 
-testsContext.keys().forEach(testsContext);
+testsContext.keys().forEach(testsContext);*/
