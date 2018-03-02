@@ -15,12 +15,12 @@ import './TodoList.css';
  * Interfaces of TodoList state/props 
  */
 interface TodoListState {
-    
+
 }
 
 interface TodoListProps {
-    changeStatus: (todo: TodoImmutable) => Promise<void>;
-    removeTodo: (todo: TodoImmutable) => Promise<void>;
+    changeStatus: (todo: TodoImmutable) => void;
+    removeTodo: (todo: TodoImmutable) => void;
     todoList: List<TodoImmutable>;
 }
 

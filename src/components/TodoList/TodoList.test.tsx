@@ -10,8 +10,12 @@ import { CodeStatus } from '../../constants/constants';
 
 describe('<TodoList />', () => {
 
-    const changeStatus = (todo: TodoImmutable) => Promise.resolve();
-    const removeTodo = (todo: TodoImmutable) => Promise.resolve();
+    const changeStatus = (todo: TodoImmutable) => {
+        return;
+    };
+    const removeTodo = (todo: TodoImmutable) => {
+        return;
+    };
 
     it('renders the <TodoList /> component', () => {
 

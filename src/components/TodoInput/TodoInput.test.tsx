@@ -7,38 +7,40 @@ import sinon from 'sinon';
 
 describe('<TodoInput />', () => {
 
-    const addTodo = () => 0;
+    const addTodo = () => {
+        return;
+    };
 
     it('renders the <TodoInput /> component', () => {
 
-      const wrapper = shallow(<TodoInput addTodo={addTodo}/>);
- 
-      expect(wrapper.find(Input).props().value).to.be.equal('');
+        const wrapper = shallow(<TodoInput addTodo={addTodo} />);
+
+        expect(wrapper.find(Input).props().value).to.be.equal('');
 
     });
 
     it('renders the <TodoInput /> component and write a todo in input', () => {
-  
-        const wrapper = shallow(<TodoInput addTodo={addTodo}/>);
-        
+
+        const wrapper = shallow(<TodoInput addTodo={addTodo} />);
+
         const event = {
-            currentTarget : {
-                value : 'my todo'
+            currentTarget: {
+                value: 'my todo'
             }
         };
 
         wrapper.find(Input).simulate('change', event);
 
         expect(wrapper.find(Input).props().value).to.be.equal('my todo');
-  
+
     });
 
     it('renders the <TodoInput /> component and click on add button with empty content', () => {
 
         const addTodoSpy = sinon.spy(addTodo);
 
-        const wrapper = mount(<TodoInput addTodo={addTodoSpy}/>);
-   
+        const wrapper = mount(<TodoInput addTodo={addTodoSpy} />);
+
         wrapper.find(IconButton).simulate('click');
 
         expect(addTodoSpy.calledOnce).to.equal(false);
@@ -48,9 +50,9 @@ describe('<TodoInput />', () => {
 
         const addTodoSpy = sinon.spy(addTodo);
 
-        const wrapper = mount(<TodoInput addTodo={addTodoSpy}/>);
-   
-        wrapper.setState({todoContent : 'new todo'});
+        const wrapper = mount(<TodoInput addTodo={addTodoSpy} />);
+
+        wrapper.setState({ todoContent: 'new todo' });
 
         wrapper.find(IconButton).simulate('click');
 
@@ -59,5 +61,5 @@ describe('<TodoInput />', () => {
         expect(wrapper.find(Input).props().value).to.equal('');
 
     });
-   
+
 });
