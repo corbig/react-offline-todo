@@ -55,6 +55,8 @@ describe('<TodoInput />', () => {
         wrapper.find(IconButton).simulate('click');
 
         expect(addTodoSpy.calledOnce).to.equal(true);
+        expect(addTodoSpy.getCall(0).args[0]).to.equal('new todo');
+        expect(wrapper.find(Input).props().value).to.equal('');
 
     });
    
