@@ -83,7 +83,6 @@ describe('<TodoList />', () => {
 
         let todoList: List<TodoImmutable> = fromJS([todo]);
 
-        // tslint:disable-next-line:max-line-length
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatusSpy} removeTodo={removeTodo} />);
 
         expect(wrapper.find(ListItem).length).to.equal(1);
@@ -108,7 +107,6 @@ describe('<TodoList />', () => {
 
         let todoList: List<TodoImmutable> = fromJS([todo]);
 
-        // tslint:disable-next-line:max-line-length
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodoSpy} />);
 
         expect(wrapper.find(ListItem).length).to.equal(1);
