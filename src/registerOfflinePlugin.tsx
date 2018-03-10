@@ -8,17 +8,17 @@ const reloadWindow = () => window.location.reload();
 
 const renderSnackBarUpdate = () => {
 
-const buttonSnackBar = (<Button color="accent" onClick={reloadWindow} dense={true}>Update</Button>);
+  const buttonSnackBar = (<Button color="secondary" onClick={reloadWindow}>Update</Button>);
 
-const snackBar = (
-  <Snackbar
+  const snackBar = (
+    <Snackbar
       open={true}
       message={<span>An update is Available</span>}
       action={buttonSnackBar}
-  />
-);
+    />
+  );
 
-ReactDOM.render(snackBar, document.getElementById('reload-snack') as HTMLElement);
+  ReactDOM.render(snackBar, document.getElementById('reload-snack') as HTMLElement);
 
 };
 
