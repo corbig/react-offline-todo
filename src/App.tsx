@@ -17,7 +17,7 @@ class App extends React.Component {
         <div className="app">
           <AppBar position="static" color="primary">
             <Toolbar>
-              <Typography type="title" color="inherit">
+              <Typography variant="title" color="inherit">
                 React-Offline-Todo
               </Typography>
             </Toolbar>
