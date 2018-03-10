@@ -95,7 +95,7 @@ module.exports = {
       '.jsx',
     ],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -120,6 +120,7 @@ module.exports = {
       // It's important to do this before Babel processes the JS.
       {
         test: /\.(ts|tsx)$/,
+        exclude: /\.test.(ts|tsx)$/,
         loader: require.resolve('tslint-loader'),
         enforce: 'pre',
         include: paths.appSrc,
