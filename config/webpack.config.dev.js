@@ -120,7 +120,6 @@ module.exports = {
       // It's important to do this before Babel processes the JS.
       {
         test: /\.(ts|tsx)$/,
-        exclude: /\.test.(ts|tsx)$/,
         loader: require.resolve('tslint-loader'),
         enforce: 'pre',
         include: paths.appSrc,
