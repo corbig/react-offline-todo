@@ -14,10 +14,10 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div className="app">
-        
+
           <AppBar position="static" color="primary">
             <Toolbar>
-              <Typography type="title" color="inherit">
+              <Typography variant="title" color="inherit">
                 React-Todo
               </Typography>
             </Toolbar>
