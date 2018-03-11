@@ -5,7 +5,7 @@ module.exports = function (config) {
 
         frameworks: ['mocha'],
 
-        browsers: ['Chromium'],
+        browsers: ['Chrome'],
 
         files: [
             'src/setupTests.tsx'
