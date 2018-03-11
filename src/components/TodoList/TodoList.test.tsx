@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { TodoList } from './TodoList';
 import { expect } from 'chai';
 import { IconButton, ListItem, Checkbox, ListItemText } from 'material-ui';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import { TodoImmutable, Todo } from '../../entities/Todo';
 import { List, fromJS } from 'immutable';
 import { CodeStatus } from '../../constants/constants';

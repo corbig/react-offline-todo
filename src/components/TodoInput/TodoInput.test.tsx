@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import { TodoInput } from './TodoInput';
 import { expect } from 'chai';
 import { Input, IconButton } from 'material-ui';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 
 describe('<TodoInput />', () => {
 
