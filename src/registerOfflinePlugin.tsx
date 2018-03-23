@@ -13,7 +13,7 @@ const renderSnackBarUpdate = () => {
   const snackBar = (
     <Snackbar
       open={true}
-      message={<span>An update is Available</span>}
+      message={<span>An update is available</span>}
       action={buttonSnackBar}
     />
   );
