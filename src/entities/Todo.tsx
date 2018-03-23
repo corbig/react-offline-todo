@@ -15,7 +15,7 @@ export interface TodoImmutable extends TypedRecord<TodoImmutable> {
 
 /** Mutable todo interface */
 export interface Todo {
-    _id?: string;  // id parameter of PouchDB document because here a todo is also a Pouch doc
+    _id: string;  // id parameter of PouchDB document because here a todo is also a Pouch doc
     _rev?: string; // revision of the Pouch doc
     content: string; // content of the todo
     status: CodeStatus; // status of the todo
