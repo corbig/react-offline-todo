@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { TodoList } from './TodoList';
-import { expect } from 'chai';
+import { expect as chaiExpect } from 'chai';
 import { IconButton, ListItem, Checkbox, ListItemText } from 'material-ui';
 import * as sinon from 'sinon';
 import { TodoImmutable, Todo } from '../../entities/Todo';
 import { List, fromJS } from 'immutable';
 import { CodeStatus } from '../../constants/constants';
+import * as renderer from 'react-test-renderer';
 
 describe('<TodoList />', () => {
 
@@ -17,17 +18,17 @@ describe('<TodoList />', () => {
         return;
     };
 
-    it('renders the <TodoList /> component', () => {
+    it('should render a <TodoList /> component', () => {
 
         const todoList: List<TodoImmutable> = fromJS([]);
 
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodo} />);
 
-        expect(wrapper.find(ListItem).length).to.equal(0);
+        chaiExpect(wrapper.find(ListItem).length).to.equal(0);
 
     });
 
-    it('renders the <TodoList /> component with an unfinished todo', () => {
+    it('should render a <TodoList /> component with an unfinished todo', () => {
 
         const todo: Todo = {
             id: 'todo_1',
@@ -39,17 +40,31 @@ describe('<TodoList />', () => {
 
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodo} />);
 
-        expect(wrapper.find(ListItem).length).to.equal(1);
+        chaiExpect(wrapper.find(ListItem).length).to.equal(1);
 
         const todoElement = wrapper.find(ListItem);
 
-        expect(todoElement.find(Checkbox).props().checked).to.equal(false);
-        expect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
-        expect(todoElement.find(ListItemText).props().className).to.equal('');
+        chaiExpect(todoElement.find(Checkbox).props().checked).to.equal(false);
+        chaiExpect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
+        chaiExpect(todoElement.find(ListItemText).props().className).to.equal('');
 
     });
 
-    it('renders the <TodoList /> component with an finished todo', () => {
+    it('should render a <TodoList /> component with an unfinished todo (Jest snapshot ver.)', () => {
+        const todo: Todo = {
+            id: 'todo_1',
+            content: 'my todo',
+            status: CodeStatus.TODO
+        };
+
+        let todoList: List<TodoImmutable> = fromJS([todo]);
+
+        const componentTree = renderer.create(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodo} />).toJSON();
+        // Jest's expect function
+        expect(componentTree).toMatchSnapshot();
+    });
+
+    it('should render a <TodoList /> component with a finished todo', () => {
 
         const todo: Todo = {
             id: 'todo_1',
@@ -61,17 +76,32 @@ describe('<TodoList />', () => {
 
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodo} />);
 
-        expect(wrapper.find(ListItem).length).to.equal(1);
+        chaiExpect(wrapper.find(ListItem).length).to.equal(1);
 
         const todoElement = wrapper.find(ListItem);
 
-        expect(todoElement.find(Checkbox).props().checked).to.equal(true);
-        expect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
-        expect(todoElement.find(ListItemText).props().className).to.equal('todo-done');
+        chaiExpect(todoElement.find(Checkbox).props().checked).to.equal(true);
+        chaiExpect(todoElement.find(ListItemText).props().primary).to.equal('my todo');
+        chaiExpect(todoElement.find(ListItemText).props().className).to.equal('todo-done');
 
     });
 
-    it('renders the <TodoList /> component and change todo status', () => {
+    it('should render a <TodoList /> component with a finished todo (Jest snapshot ver.)', () => {
+        const todo: Todo = {
+            id: 'todo_1',
+            content: 'my todo',
+            status: CodeStatus.DONE
+        };
+
+        let todoList: List<TodoImmutable> = fromJS([todo]);
+
+        const componentTree = renderer.create(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodo} />).toJSON();
+        
+        // Jest's expect function
+        expect(componentTree).toMatchSnapshot();
+    });
+
+    it('should render a <TodoList /> component and change todo status', () => {
 
         const changeStatusSpy = sinon.spy(changeStatus);
 
@@ -85,17 +115,17 @@ describe('<TodoList />', () => {
 
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatusSpy} removeTodo={removeTodo} />);
 
-        expect(wrapper.find(ListItem).length).to.equal(1);
+        chaiExpect(wrapper.find(ListItem).length).to.equal(1);
 
         const todoElement = wrapper.find(ListItem);
 
         todoElement.simulate('click');
 
-        expect(changeStatusSpy.calledOnce).to.equal(true);
+        sinon.assert.calledOnce(changeStatusSpy);
 
     });
 
-    it('renders the <TodoList /> component and remove todo', () => {
+    it('should render a <TodoList /> component and remove todo', () => {
 
         const removeTodoSpy = sinon.spy(removeTodo);
 
@@ -109,13 +139,13 @@ describe('<TodoList />', () => {
 
         const wrapper = shallow(<TodoList todoList={todoList} changeStatus={changeStatus} removeTodo={removeTodoSpy} />);
 
-        expect(wrapper.find(ListItem).length).to.equal(1);
+        chaiExpect(wrapper.find(ListItem).length).to.equal(1);
 
         const removeButtonElement = wrapper.find(ListItem).find(IconButton);
 
         removeButtonElement.simulate('click');
 
-        expect(removeTodoSpy.calledOnce).to.equal(true);
+        sinon.assert.calledOnce(removeTodoSpy);
 
     });
 

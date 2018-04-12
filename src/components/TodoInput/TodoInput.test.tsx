@@ -11,7 +11,7 @@ describe('<TodoInput />', () => {
         return;
     };
 
-    it('renders the <TodoInput /> component', () => {
+    it('should render a <TodoInput /> component', () => {
 
         const wrapper = shallow(<TodoInput addTodo={addTodo} />);
 
@@ -19,7 +19,7 @@ describe('<TodoInput />', () => {
 
     });
 
-    it('renders the <TodoInput /> component and write a todo in input', () => {
+    it('should render a <TodoInput /> component and write a todo in input', () => {
 
         const wrapper = shallow(<TodoInput addTodo={addTodo} />);
 
@@ -35,18 +35,17 @@ describe('<TodoInput />', () => {
 
     });
 
-    it('renders the <TodoInput /> component and click on add button with empty content', () => {
+    it('should render a <TodoInput /> and not call addTodo on click event if content is empty', () => {
 
         const addTodoSpy = sinon.spy(addTodo);
-
         const wrapper = mount(<TodoInput addTodo={addTodoSpy} />);
 
         wrapper.find(IconButton).simulate('click');
 
-        expect(addTodoSpy.calledOnce).to.equal(false);
+        sinon.assert.notCalled(addTodoSpy);
     });
 
-    it('renders the <TodoInput /> component and click on add button with content', () => {
+    it('should render a <TodoInput /> and call addTodo on click event', () => {
 
         const addTodoSpy = sinon.spy(addTodo);
 
@@ -56,10 +55,9 @@ describe('<TodoInput />', () => {
 
         wrapper.find(IconButton).simulate('click');
 
-        expect(addTodoSpy.calledOnce).to.equal(true);
-        expect(addTodoSpy.getCall(0).args[0]).to.equal('new todo');
+        sinon.assert.calledOnce(addTodoSpy);
+        sinon.assert.calledWithExactly(addTodoSpy, 'new todo');
         expect(wrapper.find(Input).props().value).to.equal('');
-
     });
 
 });
